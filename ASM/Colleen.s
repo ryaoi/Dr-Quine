@@ -1,5 +1,5 @@
 section .data
-str: db "section .data%cstr: db %c%s%c%cglobal _main%cextern _printf%csection .text%c;first comment%c_main:%c;second comment%cpush rbp%cmov rbp, rsp%csub rsp, 0xE0%cxor rcx, rcx%cfill_newline:%cmov dword [rsp+rcx*8], 0x0A%cinc rcx%ccmp rcx, 29%cjne fill_newline%ccall _donothing%clea rdi, [rel str]%cmov rsi, 0x0A%cmov rdx, 0x22%clea rcx, [rel str]%cmov r8, 0x22%cmov r9, 0x0A%ccall _printf%cadd rsp, 0xE0%cpop rbp%cret%c_donothing:%cnop%cret%c"
+str: db "section .data%cstr: db %c%s%c, 00%cglobal _main%cextern _printf%csection .text%c;first comment%c_main:%c;second comment%cpush rbp%cmov rbp, rsp%csub rsp, 0xE0%cxor rcx, rcx%cfill_newline:%cmov dword [rsp+rcx*8], 0x0A%cinc rcx%ccmp rcx, 29%cjne fill_newline%ccall _donothing%clea rdi, [rel str]%cmov rsi, 0x0A%cmov rdx, 0x22%clea rcx, [rel str]%cmov r8, 0x22%cmov r9, 0x0A%ccall _printf%cadd rsp, 0xE0%cpop rbp%cret%c_donothing:%cnop%cret%c", 00
 global _main
 extern _printf
 section .text
