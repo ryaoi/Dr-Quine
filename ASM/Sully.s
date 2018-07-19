@@ -9,31 +9,32 @@ extern _dprintf
 extern _asprintf
 extern _system
 extern _free
-
 section .text
 _main:
 push rbp
 mov rbp, rsp
 sub rsp, 0x1000
-mov dword [rbp-0x4], 5
-
+mov qword [rbp-0x4], 5
 create_sullys:
-lea rdi, [rbp - 0x8]
+lea rdi, [rbp - 0x30]
 lea rsi, [rel sullysource]
 mov rdx, [rbp-0x4]
 xor al, al
+push rdx
+push rdi
 call _asprintf
-
+pop rdi
+pop rdx
+mov qword [rbp-0x4], rdx
 mov rax, SYSOPEN
-mov qword rdi, [rbp-0x8]
+mov qword rdi, [rbp-0x30]
 mov rsi, FLAG_OPT
 mov rdx, 0o644
 syscall
-mov [rbp-0x10], rax
-
-mov qword rdi, [rbp-0x8]
+cmp rax, -1
+je end_sully
+mov qword rdi, [rbp-0x30]
 call _free
-
 xor rcx, rcx
 fill_newline:
 mov dword [rsp+rcx*8], 0x0A
@@ -54,32 +55,28 @@ lea rbx, [rel str]
 mov qword [rsp+0x20], rbx
 mov dword [rsp+0x28], 0x22
 call _dprintf
-
-mov rax, [rbp-0x4]
-dec rax
-cmp rax, 0
-jz end_sully
-lea rdi, [rbp-0x8]
+mov eax, [rbp-0x4]
+dec eax
+cmp eax, 0
+jl end_sully
+lea rdi, [rbp-0x30]
 lea rsi, [rel sysstr]
 mov rcx, [rbp-0x4]
 mov rdx, [rbp-0x4]
-push r10
+xor al, al
 call _asprintf
-pop r10
-
-mov qword rdi, [rbp-0x8]
+mov qword rdi, [rbp-0x30]
 call _system
-
-mov qword rdi, [rbp-0x8]
+mov qword rdi, [rbp-0x30]
 call _free
-mov rax, [rbp-0x4]
-dec rax
-mov [rbp-0x4], rax
-cmp rax, 0
+mov eax, [rbp-0x4]
+dec eax
+mov [rbp-0x4], eax
+cmp eax, 0
 jge create_sullys
-
 end_sully:
 add rsp, 0x1000
 pop rbp
+xor rax, rax
 ret
 
