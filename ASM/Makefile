@@ -6,7 +6,7 @@
 #    By: ryaoi <ryaoi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/17 13:17:32 by ryaoi             #+#    #+#              #
-#    Updated: 2018/07/20 13:52:09 by ryaoi            ###   ########.fr        #
+#    Updated: 2018/07/20 13:53:12 by ryaoi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ fclean_Sully:
 clean :
 	rm -rf Colleen.o Grace.o Sully.o
 
-fclean: fclean_Colleen fclean_Grace fclean_Sully
+fclean: clean fclean_Colleen fclean_Grace fclean_Sully
 
 re: fclean
 	make
