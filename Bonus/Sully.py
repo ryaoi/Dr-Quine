@@ -1,8 +1,11 @@
+from os import system
 if __name__ == "__main__":
     i = 5
-    string = """if __name__ == %c__main__%c:%c    i = %d%c    string = %c%c%c%s%c%c%c%c    for index, elem in enumerate((%cSully_{}.py%c.format(x) for x in range(i+1))):%c        try:%c            with open(elem, %cw%c) as sully: sully.write((string %% ('"', '"', chr(0x0A), index, chr(0x0A), '"', '"', '"', string, '"', '"', '"', chr(0x0A), '"', '"', chr(0x0A), chr(0x0A), '"', '"', chr(0x0A), chr(0x0A), chr(0x0A))))%c        except:%c            pass%c"""
-    for index, elem in enumerate(("Sully_{}.py".format(x) for x in range(i+1))):
-        try:
-            with open(elem, "w") as sully: sully.write((string % ('"', '"', chr(0x0A), index, chr(0x0A), '"', '"', '"', string, '"', '"', '"', chr(0x0A), '"', '"', chr(0x0A), chr(0x0A), '"', '"', chr(0x0A), chr(0x0A), chr(0x0A))))
-        except:
-            pass
+    if (i <= 0): exit()
+    if (__file__ != "Sully.py"): i-= 1
+    string = """from os import system{0}if __name__ == {1}__main__{1}:{0}    i = {2}{0}    if (i <= 0): exit(){0}    if (__file__ != {1}Sully.py{1}): i-= 1{0}    string = {1}{1}{1}{3}{1}{1}{1}{0}    try:{0}        with open({1}Sully_{1} + str(i) + {1}.py{1}, {1}w{1}) as sully: sully.write(string.format(chr(0x0A), '"', i, string)){0}        system({1}python3 Sully_{1} + str(i) + {1}.py{1}){0}    except:{0}        pass{0}"""
+    try:
+        with open("Sully_" + str(i) + ".py", "w") as sully: sully.write(string.format(chr(0x0A), '"', i, string))
+        system("python3 Sully_" + str(i) + ".py")
+    except:
+        pass
